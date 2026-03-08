@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gotcha Burger — Eugene, OR</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Oswald:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #D42B2B;
+    --red-dark: #A01E1E;
+    --yellow: #F5C10E;
+    --black: #0D0D0D;
+    --dark: #141414;
+    --mid: #1E1E1E;
+    --cream: #FFF3E0;
+    --text: #E8E0D5;
+    --muted: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--yellow);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-cta {
+    background: var(--red);
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; color: #fff !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(212,43,43,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(245,193,14,0.08) 0%, transparent 50%);
+  }
+  .hero-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 120px 80px 80px;
+    max-width: 700px;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(245,193,14,0.12);
+    border: 1px solid rgba(245,193,14,0.3);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--yellow);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 130px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: #fff;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-title .accent { color: var(--red); }
+  .hero-title .stroke {
+    -webkit-text-stroke: 2px rgba(255,255,255,0.3);
+    color: transparent;
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1.1rem;
+    color: rgba(232,224,213,0.7);
+    max-width: 480px;
+    line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--red);
+    color: #fff;
+    padding: 18px 40px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(212,43,43,0.4);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    color: var(--text);
+    padding: 18px 36px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    font-weight: 500;
+  }
+  .btn-secondary:hover {
+    border-color: var(--yellow);
+    color: var(--yellow);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    margin-top: 72px;
+    display: flex;
+    gap: 48px;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .stat { }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .hero-image-block {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s 0.3s ease both;
+  }
+  .hero-burger-svg {
+    width: 520px;
+    height: 520px;
+    opacity: 0.85;
+    filter: drop-shadow(0 40px 80px rgba(212,43,43,0.3));
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ─── MARQUEE TICKER ─── */
+  .ticker {
+    background: var(--red);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0 48px;
+  }
+  .ticker-item .dot {
+    color: var(--yellow);
+    margin-right: 48px;
+    font-size: 1.2rem;
+    vertical-align: middle;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 2px;
+    background: var(--red);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  .section-title .y { color: var(--yellow); }
+
+  /* ─── STORY ─── */
+  #story {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+  #story::before {
+    content: 'GOTCHA';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 280px;
+    line-height: 1;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .story-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(232,224,213,0.75);
+    margin-top: 24px;
+  }
+  .story-text p + p { margin-top: 20px; }
+  .story-highlight {
+    margin-top: 40px;
+    border-left: 3px solid var(--yellow);
+    padding-left: 24px;
+  }
+  .story-highlight p {
+    font-size: 1.25rem !important;
+    font-style: italic;
+    color: var(--cream) !important;
+    margin-top: 0 !important;
+    line-height: 1.6 !important;
+  }
+  .story-highlight cite {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-style: normal;
+  }
+  .story-visual {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 24px;
+  }
+  .story-card-big {
+    background: var(--mid);
+    border-radius: 4px;
+    padding: 48px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .story-card-big::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(245,193,14,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .sauce-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .story-card-big h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--yellow);
+  }
+  .story-card-big p {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: rgba(232,224,213,0.6);
+    line-height: 1.7;
+  }
+  .story-mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .mini-card {
+    background: var(--mid);
+    border-radius: 4px;
+    padding: 28px 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .mini-card .ico { font-size: 1.8rem; margin-bottom: 12px; }
+  .mini-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+  .mini-card p {
+    margin-top: 6px;
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ─── MENU ─── */
+  #menu {
+    background: var(--black);
+  }
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .menu-tabs {
+    display: flex;
+    gap: 8px;
+    background: var(--mid);
+    padding: 6px;
+    border-radius: 4px;
+  }
+  .menu-tab {
+    padding: 10px 24px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .menu-tab.active {
+    background: var(--red);
+    color: #fff;
+  }
+  .menu-tab:hover:not(.active) { color: var(--text); }
+
+  .menu-section { display: none; }
+  .menu-section.active { display: block; }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2px;
+  }
+  .menu-item {
+    background: var(--mid);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: default;
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+  .menu-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .menu-item:hover::after { transform: scaleX(1); }
+  .menu-item:hover { background: #222; }
+  .menu-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .menu-item-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #fff;
+  }
+  .menu-item-badge {
+    flex-shrink: 0;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .menu-item-badge.hot { background: var(--red); color: #fff; }
+  .menu-item-desc {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: rgba(232,224,213,0.55);
+    line-height: 1.6;
+  }
+  .menu-item-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .menu-item-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--yellow);
+    letter-spacing: 0.05em;
+  }
+  .menu-item-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+  }
+
+  /* ─── SAUCE FEATURE ─── */
+  #sauce {
+    background: var(--red);
+    padding: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #sauce::before {
+    content: '★ THE SECRET ★';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    white-space: nowrap;
+    color: rgba(0,0,0,0.08);
+    pointer-events: none;
+  }
+  .sauce-content { position: relative; z-index: 1; }
+  .sauce-content .section-label { color: rgba(255,255,255,0.7); justify-content: center; }
+  .sauce-content .section-label::before { background: rgba(255,255,255,0.5); }
+  #sauce .section-title { color: #fff; }
+  #sauce .section-title .y { color: var(--yellow); }
+  #sauce p {
+    margin-top: 24px;
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 580px;
+    margin-inline: auto;
+    line-height: 1.75;
+  }
+  #sauce .btn-primary {
+    margin-top: 40px;
+    background: var(--black);
+    display: inline-flex;
+  }
+  #sauce .btn-primary:hover { background: #1a1a1a; }
+
+  /* ─── LOCATIONS ─── */
+  #locations {
+    background: var(--dark);
+  }
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 60px;
+  }
+  .location-card {
+    background: var(--mid);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: transform 0.3s;
+  }
+  .location-card:hover { transform: translateY(-4px); }
+  .location-card-header {
+    background: var(--black);
+    padding: 32px 36px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .location-card-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+  .location-badge {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+  .location-badge.mall { background: var(--yellow); color: var(--black); }
+  .location-body { padding: 36px; }
+  .location-info-row {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .location-info-row .ico2 { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+  .location-info-row .detail { font-size: 0.92rem; color: rgba(232,224,213,0.75); line-height: 1.5; }
+  .location-info-row .detail strong { color: var(--text); font-weight: 500; }
+  .hours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+    margin-top: 4px;
+  }
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.83rem;
+    color: rgba(232,224,213,0.6);
+  }
+  .hours-row .day { color: var(--text); font-weight: 500; }
+  .hours-row .open { color: var(--yellow); }
+  .location-cta {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+  }
+  .btn-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text);
+    padding: 12px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .btn-map:hover { border-color: var(--text); }
+  .btn-order {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--red);
+    color: #fff;
+    padding: 12px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-order:hover { background: var(--red-dark); }
+
+  /* ─── ORDER ONLINE STRIP ─── */
+  #order-online {
+    background: var(--yellow);
+    padding: 72px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  #order-online h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: var(--black);
+  }
+  #order-online p {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: rgba(0,0,0,0.65);
+    max-width: 400px;
+  }
+  .delivery-apps {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .delivery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--black);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .delivery-btn:hover { background: var(--red); transform: translateY(-2px); }
+
+  /* ─── REVIEWS ─── */
+  #reviews {
+    background: var(--black);
+  }
+  .reviews-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .rating-block {
+    text-align: right;
+  }
+  .rating-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+  .rating-stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; }
+  .rating-count { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+  .reviews-track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .review-card {
+    background: var(--mid);
+    border-radius: 4px;
+    padding: 36px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: transform 0.3s;
+  }
+  .review-card:hover { transform: translateY(-4px); }
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    right: 28px;
+    font-family: Georgia, serif;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .review-stars { color: var(--yellow); font-size: 0.9rem; letter-spacing: 2px; }
+  .review-text {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: rgba(232,224,213,0.75);
+    line-height: 1.7;
+  }
+  .review-author {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .review-author-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+  .review-author-info span {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 72px 80px 40px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand .nav-logo { font-size: 2.4rem; }
+  .footer-brand p {
+    margin-top: 16px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 260px;
+  }
+  .footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .social-link {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--red); color: var(--red); }
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li + li { margin-top: 12px; }
+  .footer-col a {
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--text); }
+  .footer-bottom {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: rgba(136,136,136,0.6);
+  }
+  .footer-bottom a { color: var(--muted); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--text); }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero-content { padding: 120px 24px 80px; max-width: 100%; }
+    .hero-image-block { display: none; }
+    .hero-title { font-size: clamp(60px, 15vw, 100px); }
+    .story-grid, .locations-grid { grid-template-columns: 1fr; }
+    .reviews-track { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    #order-online { flex-direction: column; padding: 60px 24px; }
+    #sauce { padding: 60px 24px; }
+    .menu-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .hero-stats { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">GOTCHA<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">📍 Eugene, Oregon · Est. Family Recipe</div>
+    <h1 class="hero-title">
+      WE<br><span class="accent">GOT</span><br><span class="stroke">CHA.</span>
+    </h1>
+    <p class="hero-sub">
+      Eugene's most beloved smashburger spot. Fresh-smashed patties, legendary Gotcha Sauce, crispy sides — open late so we're always here when you need us.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">
+        <span>View Menu</span>
+        <span>→</span>
+      </a>
+      <a href="#locations" class="btn-secondary">
+        <span>Find a Location</span>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4.3★</div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Locations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$10</div>
+        <div class="stat-label">Most meals under</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4AM</div>
+        <div class="stat-label">Fri–Sat Close</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image-block">
+    <!-- Illustrated burger SVG -->
+    <svg class="hero-burger-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Plate shadow -->
+      <ellipse cx="200" cy="360" rx="140" ry="18" fill="rgba(0,0,0,0.3)"/>
+      <!-- Bottom bun -->
+      <ellipse cx="200" cy="330" rx="125" ry="22" fill="#D4954A"/>
+      <ellipse cx="200" cy="315" rx="125" ry="22" fill="#E8A755"/>
+      <!-- Sesame seeds on bottom -->
+      <ellipse cx="165" cy="310" rx="5" ry="3" fill="#C8873A" transform="rotate(-15 165 310)"/>
+      <ellipse cx="200" cy="307" rx="5" ry="3" fill="#C8873A"/>
+      <ellipse cx="235" cy="310" rx="5" ry="3" fill="#C8873A" transform="rotate(15 235 310)"/>
+      <!-- Ketchup/sauce drip -->
+      <path d="M155 295 Q145 285 148 270 Q151 255 155 250" stroke="#D42B2B" stroke-width="8" stroke-linecap="round"/>
+      <path d="M240 290 Q255 278 252 262 Q249 248 245 242" stroke="#D42B2B" stroke-width="6" stroke-linecap="round"/>
+      <!-- Patty 1 -->
+      <ellipse cx="200" cy="298" rx="122" ry="18" fill="#3D1F0B"/>
+      <ellipse cx="200" cy="285" rx="122" ry="18" fill="#5C2D0E"/>
+      <!-- Cheese layer 1 -->
+      <path d="M75 275 L80 258 L320 258 L325 275 Q200 282 75 275Z" fill="#F5C10E"/>
+      <!-- Slivered veggies -->
+      <rect x="88" y="252" width="224" height="8" rx="4" fill="#5A8A3C" opacity="0.9"/>
+      <!-- Tomato -->
+      <path d="M90 248 Q200 242 310 248 L315 256 Q200 252 85 256Z" fill="#C0392B" opacity="0.85"/>
+      <!-- Patty 2 -->
+      <ellipse cx="200" cy="250" rx="120" ry="17" fill="#3D1F0B"/>
+      <ellipse cx="200" cy="238" rx="120" ry="17" fill="#5C2D0E"/>
+      <!-- Cheese layer 2 -->
+      <path d="M80 228 L85 210 L315 210 L320 228 Q200 235 80 228Z" fill="#F5C10E"/>
+      <!-- Lettuce -->
+      <path d="M70 208 Q120 195 200 200 Q280 195 330 208 L325 215 Q200 208 75 215Z" fill="#4CAF50" opacity="0.9"/>
+      <path d="M72 210 Q100 200 130 205 Q110 218 72 215Z" fill="#66BB6A" opacity="0.7"/>
+      <path d="M270 205 Q300 200 328 210 L325 215 Q295 212 270 212Z" fill="#66BB6A" opacity="0.7"/>
+      <!-- Onions -->
+      <path d="M88 203 Q200 196 312 203" stroke="#F4E0B0" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+      <!-- Top bun -->
+      <ellipse cx="200" cy="195" rx="118" ry="16" fill="#E8A755"/>
+      <path d="M82 190 Q200 115 318 190 L318 198 Q200 175 82 198Z" fill="#E8A755"/>
+      <path d="M83 188 Q200 112 317 188 Q200 160 83 188Z" fill="#D4954A"/>
+      <!-- Sesame seeds on top bun -->
+      <ellipse cx="160" cy="155" rx="7" ry="4" fill="#C8873A" transform="rotate(-20 160 155)"/>
+      <ellipse cx="200" cy="140" rx="7" ry="4" fill="#C8873A"/>
+      <ellipse cx="240" cy="155" rx="7" ry="4" fill="#C8873A" transform="rotate(20 240 155)"/>
+      <ellipse cx="180" cy="168" rx="6" ry="3.5" fill="#C8873A" transform="rotate(-10 180 168)"/>
+      <ellipse cx="222" cy="168" rx="6" ry="3.5" fill="#C8873A" transform="rotate(10 222 168)"/>
+      <!-- Shine on bun -->
+      <ellipse cx="170" cy="148" rx="28" ry="12" fill="rgba(255,255,255,0.1)" transform="rotate(-15 170 148)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="dot">★</span> Fresh-Smashed Daily</span>
+    <span class="ticker-item"><span class="dot">★</span> Legendary Gotcha Sauce</span>
+    <span class="ticker-item"><span class="dot">★</span> Late Night Eugene</span>
+    <span class="ticker-item"><span class="dot">★</span> Drive-Thru Available</span>
+    <span class="ticker-item"><span class="dot">★</span> Family Owned & Operated</span>
+    <span class="ticker-item"><span class="dot">★</span> Delivery on Grubhub</span>
+    <span class="ticker-item"><span class="dot">★</span> Open Until 4AM Weekends</span>
+    <span class="ticker-item"><span class="dot">★</span> Most Meals Under $10</span>
+    <!-- repeat for seamless loop -->
+    <span class="ticker-item"><span class="dot">★</span> Fresh-Smashed Daily</span>
+    <span class="ticker-item"><span class="dot">★</span> Legendary Gotcha Sauce</span>
+    <span class="ticker-item"><span class="dot">★</span> Late Night Eugene</span>
+    <span class="ticker-item"><span class="dot">★</span> Drive-Thru Available</span>
+    <span class="ticker-item"><span class="dot">★</span> Family Owned & Operated</span>
+    <span class="ticker-item"><span class="dot">★</span> Delivery on Grubhub</span>
+    <span class="ticker-item"><span class="dot">★</span> Open Until 4AM Weekends</span>
+    <span class="ticker-item"><span class="dot">★</span> Most Meals Under $10</span>
+  </div>
+</div>
+
+<!-- ─── STORY ─── -->
+<section id="story">
+  <div class="story-grid">
+    <div class="story-text reveal">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">BORN <span class="y">AND RAISED</span><br>IN EUGENE</h2>
+      <p>Gotcha Burger was born from a family tradition. Trevon Huntley grew up in Eugene watching his father perfect a burger and sauce recipe that would one day become legendary. Surrounded by diverse, home-cooked flavors — from Indian to Mediterranean — one meal always stood apart: his dad's burgers and fries.</p>
+      <p>What started as a family recipe at the Kazaam food truck on East 18th Street quickly became their best-selling item. So the Huntleys did what any passionate family would do — they went all in and opened Gotcha Burger.</p>
+      <p>Today, Trevon runs day-to-day operations, working from open to close — chopping fresh vegetables, forming patties by hand, and building relationships with every customer who rolls through.</p>
+      <div class="story-highlight">
+        <p>"We call it Gotcha Burger because we gotcha — whether you're a student looking for a quick bite, a family from the top of the hill, or just someone needing a late-night meal."</p>
+        <cite>— Trevon Huntley, Founder</cite>
+      </div>
+    </div>
+    <div class="story-visual reveal">
+      <div class="story-card-big">
+        <span class="sauce-icon">🔥</span>
+        <h3>The Gotcha Sauce</h3>
+        <p>It started with Trevon's father making batch after batch until the recipe was perfect. That same secret family sauce — layered, bold, and unlike anything else — is what keeps Eugene coming back again and again.</p>
+      </div>
+      <div class="story-mini-cards">
+        <div class="mini-card">
+          <div class="ico">🥩</div>
+          <h4>Fresh Patties</h4>
+          <p>Hand-formed, never frozen. Smashed to perfection on a flat-top grill.</p>
+        </div>
+        <div class="mini-card">
+          <div class="ico">🌙</div>
+          <h4>Late Night</h4>
+          <p>Open until 4AM on weekends — Eugene's go-to late-night spot.</p>
+        </div>
+        <div class="mini-card">
+          <div class="ico">💛</div>
+          <h4>Community First</h4>
+          <p>A welcoming spot for everyone — from students to families to late-night cravings.</p>
+        </div>
+        <div class="mini-card">
+          <div class="ico">💰</div>
+          <h4>Unbeatable Value</h4>
+          <p>Most meals under $10. Quality food that never breaks the bank.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MENU ─── -->
+<section id="menu">
+  <div class="menu-header reveal">
+    <div>
+      <div class="section-label">What We Serve</div>
+      <h2 class="section-title">THE <span class="y">MENU</span></h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="switchTab('burgers', this)">Burgers</button>
+      <button class="menu-tab" onclick="switchTab('chicken', this)">Chicken</button>
+      <button class="menu-tab" onclick="switchTab('sides', this)">Sides</button>
+      <button class="menu-tab" onclick="switchTab('drinks', this)">Drinks</button>
+    </div>
+  </div>
+
+  <!-- BURGERS -->
+  <div class="menu-section active" id="burgers">
+    <div class="menu-grid">
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">The Gotcha Burger</div>
+          <div class="menu-item-badge">Fan Fave</div>
+        </div>
+        <div class="menu-item-desc">A fresh-smashed patty with melted cheese, secret Gotcha Sauce, lettuce, tomato, and pickles on a toasted bun. The original that started it all.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$6</div>
+          <div class="menu-item-tags">
+            <span class="tag">Smash Style</span>
+            <span class="tag">Gotcha Sauce</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Deuce Burger</div>
+          <div class="menu-item-badge">Best Seller</div>
+        </div>
+        <div class="menu-item-desc">Double smashed patties loaded with melted cheese, Gotcha sauce, lettuce, tomato, grilled onions, and pickles between toasted buns. A Eugene classic.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$8</div>
+          <div class="menu-item-tags">
+            <span class="tag">Double Patty</span>
+            <span class="tag">Smash Style</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Deuce Deuce</div>
+          <div class="menu-item-badge hot">🔥 Monster</div>
+        </div>
+        <div class="menu-item-desc">Four stacked smashed patties with plenty of melted cheese, Gotcha sauce, and all the fixings. For when you're seriously hungry — or seriously hungry.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$10</div>
+          <div class="menu-item-tags">
+            <span class="tag">4 Patties</span>
+            <span class="tag">Stacked</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Deuce Bacon Cheeseburger</div>
+          <div class="menu-item-badge">Top Rated</div>
+        </div>
+        <div class="menu-item-desc">Two smashed patties, crispy bacon, double cheese, Gotcha sauce, and classic toppings. One of our most-ordered items — and for very good reason.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$9</div>
+          <div class="menu-item-tags">
+            <span class="tag">Bacon</span>
+            <span class="tag">Double Cheese</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Bacon Cheeseburger</div>
+        </div>
+        <div class="menu-item-desc">A single juicy smashed patty with crispy bacon, melted cheese, and Gotcha sauce. Quality and simplicity — when you just want the classics done right.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$7</div>
+          <div class="menu-item-tags">
+            <span class="tag">Bacon</span>
+            <span class="tag">Classic</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Philly Cheesesteak</div>
+          <div class="menu-item-badge">Must Try</div>
+        </div>
+        <div class="menu-item-desc">Tender sliced steak, sautéed peppers and onions, melted cheese on a hoagie roll. Compact but packed with flavor — reviewers rave about every bite.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$9</div>
+          <div class="menu-item-tags">
+            <span class="tag">Steak</span>
+            <span class="tag">Grilled</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHICKEN -->
+  <div class="menu-section" id="chicken">
+    <div class="menu-grid">
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Grilled Chicken Sandwich</div>
+          <div class="menu-item-badge">Top Pick</div>
+        </div>
+        <div class="menu-item-desc">A tender grilled chicken breast with Gotcha sauce, fresh lettuce, tomato, and pickles. Light, satisfying, and absolutely on point — as reviewers have said, "perfection."</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$8</div>
+          <div class="menu-item-tags">
+            <span class="tag">Grilled</span>
+            <span class="tag">Gotcha Sauce</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Chicken Sandwich</div>
+        </div>
+        <div class="menu-item-desc">Classic crispy or grilled chicken on a toasted bun with our signature toppings. A solid go-to for anyone looking to switch it up from beef.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$7</div>
+          <div class="menu-item-tags">
+            <span class="tag">Crispy</span>
+            <span class="tag">Classic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDES -->
+  <div class="menu-section" id="sides">
+    <div class="menu-grid">
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Crispy Fries</div>
+          <div class="menu-item-badge">Fan Fave</div>
+        </div>
+        <div class="menu-item-desc">Golden, crispy, and hot every time. Reviewers say they stay warm even on the drive home — because they're made fresh, not from a freezer bag.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$3</div>
+          <div class="menu-item-tags">
+            <span class="tag">Fresh Cut</span>
+            <span class="tag">Crispy</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Onion Rings</div>
+          <div class="menu-item-badge">Must Order</div>
+        </div>
+        <div class="menu-item-desc">Thick, crunchy, full-flavored onion rings with a satisfying crunch. A perfect match for any burger on the menu.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">$3.95</div>
+          <div class="menu-item-tags">
+            <span class="tag">Thick Cut</span>
+            <span class="tag">Crunchy</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Chili Cheese Fries</div>
+          <div class="menu-item-badge hot">🔥 Bold</div>
+        </div>
+        <div class="menu-item-desc">Crispy fries topped with house-made chili, melted cheese, and chopped onions. A bold, savory upgrade to a classic side.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$6</div>
+          <div class="menu-item-tags">
+            <span class="tag">House Chili</span>
+            <span class="tag">Loaded</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Chili Cheese Dog</div>
+        </div>
+        <div class="menu-item-desc">An all-beef dog topped with house chili, warm cheese, and onions. A Valley River fan favorite — tasty and satisfying any time of day.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$5</div>
+          <div class="menu-item-tags">
+            <span class="tag">Hot Dog</span>
+            <span class="tag">Loaded</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRINKS -->
+  <div class="menu-section" id="drinks">
+    <div class="menu-grid">
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Fresh Lemonade</div>
+          <div class="menu-item-badge">Refreshing</div>
+        </div>
+        <div class="menu-item-desc">Bright, cold, and the perfect pairing with a saucy smashburger. Made to quench that hunger-and-thirst combo.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$3</div>
+          <div class="menu-item-tags"><span class="tag">Fresh</span></div>
+        </div>
+      </div>
+      <div class="menu-item reveal">
+        <div class="menu-item-top">
+          <div class="menu-item-name">Fountain Drinks</div>
+        </div>
+        <div class="menu-item-desc">Classic sodas and beverages to complete your meal. Choose your favorite and wash it all down.</div>
+        <div class="menu-item-footer">
+          <div class="menu-item-price">~$2</div>
+          <div class="menu-item-tags"><span class="tag">Assorted</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SAUCE FEATURE ─── -->
+<section id="sauce">
+  <div class="sauce-content">
+    <div class="section-label">The Secret Weapon</div>
+    <h2 class="section-title">THE <span class="y">GOTCHA</span> SAUCE</h2>
+    <p>One family recipe, perfected over decades. Trevon's father kept making batch after batch until it was right. Now it's on every burger — bold, layered, and completely one-of-a-kind. Customers say they'd "bathe in it." We just say: try it once and you'll understand.</p>
+    <a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank" class="btn-primary">Order Now & Taste It</a>
+  </div>
+</section>
+
+<!-- ─── LOCATIONS ─── -->
+<section id="locations">
+  <div class="reveal">
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title">TWO <span class="y">LOCATIONS</span></h2>
+  </div>
+  <div class="locations-grid">
+
+    <!-- Location 1 -->
+    <div class="location-card reveal">
+      <div class="location-card-header">
+        <div>
+          <h3>W 7th Ave — Main</h3>
+          <div style="font-size:0.82rem;color:var(--muted);margin-top:6px;">Food Truck · Drive-Thru · Outdoor Seating</div>
+        </div>
+        <div class="location-badge">Main Location</div>
+      </div>
+      <div class="location-body">
+        <div class="location-info-row">
+          <span class="ico2">📍</span>
+          <div class="detail">1702 W 7th Ave<br>Eugene, OR 97402</div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">📞</span>
+          <div class="detail"><a href="tel:5416539077" style="color:inherit;text-decoration:none;">(541) 653-9077</a></div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">🕐</span>
+          <div class="detail">
+            <strong>Hours</strong>
+            <div class="hours-grid" style="margin-top:10px;">
+              <div class="hours-row"><span class="day">Mon – Thu</span><span class="open">11AM – 1AM</span></div>
+              <div class="hours-row"><span class="day">Friday</span><span class="open">11AM – 4AM</span></div>
+              <div class="hours-row"><span class="day">Saturday</span><span class="open">11AM – 4AM</span></div>
+              <div class="hours-row"><span class="day">Sunday</span><span class="open">12PM – 10PM</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">✅</span>
+          <div class="detail">Drive-Thru · Delivery · Takeout · Outdoor Seating · Late Night · Pinball Machine</div>
+        </div>
+        <div class="location-cta">
+          <a href="https://maps.google.com/?q=1702+W+7th+Ave+Eugene+OR" target="_blank" class="btn-map">📍 Get Directions</a>
+          <a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank" class="btn-order">Order Delivery</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Location 2 -->
+    <div class="location-card reveal">
+      <div class="location-card-header">
+        <div>
+          <h3>Valley River Center</h3>
+          <div style="font-size:0.82rem;color:var(--muted);margin-top:6px;">Inside Valley River Center Mall</div>
+        </div>
+        <div class="location-badge mall">Mall Location</div>
+      </div>
+      <div class="location-body">
+        <div class="location-info-row">
+          <span class="ico2">📍</span>
+          <div class="detail">293 Valley River Center<br>Eugene, OR 97401</div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">📞</span>
+          <div class="detail"><a href="tel:5416835513" style="color:inherit;text-decoration:none;">(541) 683-5513</a></div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">🕐</span>
+          <div class="detail">
+            <strong>Hours</strong>
+            <div class="hours-grid" style="margin-top:10px;">
+              <div class="hours-row"><span class="day">Mon – Sat</span><span class="open">10AM – 9PM</span></div>
+              <div class="hours-row"><span class="day">Sunday</span><span class="open">11AM – 7PM</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="location-info-row">
+          <span class="ico2">✅</span>
+          <div class="detail">Dine-In · Takeout · Mall Food Court · Accessible · Family Friendly</div>
+        </div>
+        <div class="location-cta">
+          <a href="https://maps.google.com/?q=293+Valley+River+Center+Eugene+OR" target="_blank" class="btn-map">📍 Get Directions</a>
+          <a href="https://www.valleyrivercenter.com/Directory/Details/866155" target="_blank" class="btn-map">Mall Info</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ORDER ONLINE ─── -->
+<div id="order-online">
+  <div>
+    <h2>HUNGRY? ORDER<br>ONLINE NOW.</h2>
+    <p>We're on Grubhub — get Gotcha Burger delivered straight to your door. No need to wait, just tap and we gotcha.</p>
+  </div>
+  <div class="delivery-apps">
+    <a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank" class="delivery-btn">
+      🛵 Order on Grubhub
+    </a>
+    <a href="tel:5416539077" class="delivery-btn">
+      📞 Call In Your Order
+    </a>
+  </div>
+</div>
+
+<!-- ─── REVIEWS ─── -->
+<section id="reviews">
+  <div class="reviews-header reveal">
+    <div>
+      <div class="section-label">What People Say</div>
+      <h2 class="section-title">REAL <span class="y">REVIEWS</span></h2>
+    </div>
+    <div class="rating-block">
+      <div class="rating-num">4.3</div>
+      <div class="rating-stars">★★★★☆</div>
+      <div class="rating-count">Based on Google Reviews</div>
+    </div>
+  </div>
+  <div class="reviews-track">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Seriously the best place to get a burger in Eugene. I go late after work whenever I can. The Duce Bacon Burger is my go-to, it always does the job and is made to perfection every time."</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#D42B2B;color:#fff;">T</div>
+        <div class="review-author-info">
+          <strong>Trevor L.</strong>
+          <span>Google Review · Regular Customer</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Hands down one of the best burger spots in Eugene. Burgers and fries are absolutely delicious! Service is fast and the owner and employees are all incredibly kind. There is even a pinball machine while you wait!"</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#F5C10E;color:#000;">J</div>
+        <div class="review-author-info">
+          <strong>James K.</strong>
+          <span>Google Review · Eugene Local</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The chicken sandwich was perfection! The Duce Bacon was also perfectly prepared!! The bun, the sauce, the fixings are all perfect. The service took it to the next level! A must stop for a great bite to eat!"</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#5C2D0E;color:#fff;">M</div>
+        <div class="review-author-info">
+          <strong>Maria S.</strong>
+          <span>Google Review · Visitor</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"This place is nothing less than a hidden gem of Eugene. Definitely a must experience. Cheap but amazing burgers and sides. GET THE GOTCHA SAUCE. So good."</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#388E3C;color:#fff;">A</div>
+        <div class="review-author-info">
+          <strong>Alex P.</strong>
+          <span>Yelp Review</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"This family-owned roadside food cart is stellar if you're in the mood for a quick and filling meal. Quality food at a competitive price. These folks know how to make a juicy burger!"</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#1565C0;color:#fff;">R</div>
+        <div class="review-author-info">
+          <strong>Rachel D.</strong>
+          <span>Google Review · Eugene Local</span>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Philly Cheesesteak is a must, hands down. The Philly is kinda small, but the flavors are on point. And the staff always go above and beyond — they personally delivered my chili instead of making me wait."</p>
+      <div class="review-author">
+        <div class="avatar" style="background:#6A1B9A;color:#fff;">C</div>
+        <div class="review-author-info">
+          <strong>Chris W.</strong>
+          <span>Google Review</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">GOTCHA<span>.</span></a>
+      <p>Eugene's beloved smashburger spot. Family-owned, community-driven. We gotcha — whether it's lunch, dinner, or 3AM.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/gotchaburger/" target="_blank" class="social-link" title="Instagram">ig</a>
+        <a href="https://www.facebook.com/GotchaBurgers/" target="_blank" class="social-link" title="Facebook">fb</a>
+        <a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank" class="social-link" title="Grubhub">🛵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menu</h4>
+      <ul>
+        <li><a href="#menu" onclick="switchTab('burgers',document.querySelector('.menu-tab'))">Burgers</a></li>
+        <li><a href="#menu" onclick="switchTab('chicken',document.querySelectorAll('.menu-tab')[1])">Chicken</a></li>
+        <li><a href="#menu" onclick="switchTab('sides',document.querySelectorAll('.menu-tab')[2])">Sides</a></li>
+        <li><a href="#menu" onclick="switchTab('drinks',document.querySelectorAll('.menu-tab')[3])">Drinks</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="https://maps.google.com/?q=1702+W+7th+Ave+Eugene+OR" target="_blank">1702 W 7th Ave</a></li>
+        <li><a href="https://maps.google.com/?q=293+Valley+River+Center+Eugene+OR" target="_blank">Valley River Center</a></li>
+        <li><a href="tel:5416539077">(541) 653-9077</a></li>
+        <li><a href="#story">Our Story</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Order</h4>
+      <ul>
+        <li><a href="https://www.grubhub.com/restaurant/gotcha-burger-1702-w-7th-ave-eugene/4706400" target="_blank">Grubhub Delivery</a></li>
+        <li><a href="tel:5416539077">Call to Order</a></li>
+        <li><a href="#locations">Drive-Thru Hours</a></li>
+        <li><a href="https://www.facebook.com/GotchaBurgers/" target="_blank">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Gotcha Burger · Eugene, Oregon</span>
+    <span>Built with ❤️ for the Eugene community · <a href="tel:5416539077">(541) 653-9077</a></span>
+  </div>
+</footer>
+
+<script>
+  // Menu tab switching
+  function switchTab(id, btn) {
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 0);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Stagger reveals in grid
+  document.querySelectorAll('.menu-grid, .reviews-track, .story-mini-cards').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.07}s`;
+    });
+  });
+</script>
+</body>
+</html>
